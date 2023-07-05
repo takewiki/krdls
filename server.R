@@ -132,8 +132,10 @@ shinyServer(function(input, output,session) {
           })
           
           output$radar <- renderEcharts4r({
-            rd = vmdlspkg::prdLineStat_query(FStartDate = input$daterange[1], FEndDate =input$daterange[2]  )
             
+            rd = vmdlspkg::prdLineStat_query(FStartDate = input$daterange[1], FEndDate =input$daterange[2] ,token = token )
+            print('136')
+            print(rd)
             
             rd %>% 
               e_charts(FProductionLine,height = '30%') %>%
@@ -183,8 +185,8 @@ shinyServer(function(input, output,session) {
     
     #radar
     output$radar <- renderEcharts4r({
-        
-        
+      rd = vmdlspkg::prdLineStat_query(FStartDate = input$daterange[1], FEndDate =input$daterange[2] ,token = token )
+      print('187')
         rd %>% 
             e_charts(FProductionLine) %>%
             e_radar(FPlanQty, max = max(rd$FPlanQty), name = "计划生产数量") %>%
@@ -211,10 +213,6 @@ shinyServer(function(input, output,session) {
                 scroller = TRUE
             )
             
-        )%>% formatStyle(
-            '产品分组',
-            target = 'row',
-            backgroundColor = styleEqual(c(0, 1), c('gray', 'yellow'))
         )
     })
     

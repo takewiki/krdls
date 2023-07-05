@@ -29,6 +29,8 @@ kpi <- data.frame(val = c(0.95, 0.8, 0.6))
 
 
 rd <- vmdlspkg::prdLineStat_query(token = token)
+print('global')
+print(rd)
 
 
 
