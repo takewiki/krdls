@@ -6,6 +6,10 @@ library(shinyWidgets)
 library(daterangepicker)
 library(vmdlspkg)
 
+#设置访问口令
+
+token ='52C441A2-7F1B-40CA-B73D-E3F381C05AC9'
+
 DTeditCn::setDTtoCn()
 
 # 创建列表数据
@@ -15,7 +19,7 @@ DTeditCn::setDTtoCn()
 #   value2 = 1:26*2,
 #   proportion = 1:26*3
 # )
-df_list = vmdlspkg::moStat_query()
+df_list = vmdlspkg::moStat_query(token = token)
 
 data <- df_list %>% 
   select(Fcategory, FPlanQty,FActualQty, FQualifiedQty) %>% 
@@ -24,7 +28,7 @@ data <- df_list %>%
 kpi <- data.frame(val = c(0.95, 0.8, 0.6))
 
 
-rd <- vmdlspkg::prdLineStat_query()
+rd <- vmdlspkg::prdLineStat_query(token = token)
 
 
 

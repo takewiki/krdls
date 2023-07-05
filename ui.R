@@ -24,7 +24,7 @@ shinyUI(fluidPage(
         div(class='header',
         
             div(class="header-center fl",
-                div(class="header-title","     域华电子生产看板OverView"),
+                div(class="header-title","东台凯润生产看板"),
                 
                 ),
             div(class="header-img"),
@@ -67,7 +67,7 @@ shinyUI(fluidPage(
                         ))),
             
             div(class="right-cen",
-                div(class="title","overDue List"),
+                div(class="title","逾期清单"),
                 div(class="echart wenzi2",
                     div(class="dt2",dataTableOutput('dt2'),style = "font-size:80%"
                     )

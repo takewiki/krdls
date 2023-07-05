@@ -60,7 +60,7 @@ shinyServer(function(input, output,session) {
     
     # Create a table with detailed information
     output$dt <- renderDT({
-        data =vmdlspkg::moDetail_query(Fcategory = filter_date()) 
+        data =vmdlspkg::moDetail_query(Fcategory = filter_date(),token = token) 
         print(data)
         datatable(
             data, 
@@ -83,7 +83,7 @@ shinyServer(function(input, output,session) {
         
         print(input$daterange)
         
-        df_list = vmdlspkg::moStat_query(FStartDate = input$daterange[1], FEndDate =input$daterange[2] )
+        df_list = vmdlspkg::moStat_query(FStartDate = input$daterange[1], FEndDate =input$daterange[2],token = token )
         print(df_list)
         
         data <- df_list %>% 
@@ -114,7 +114,7 @@ shinyServer(function(input, output,session) {
           
           # Create a table with detailed information
           output$dt <- renderDT({
-            data =vmdlspkg::moDetail_query(Fcategory = filter_date(),FStartDate = input$daterange[1], FEndDate =input$daterange[2] ) 
+            data =vmdlspkg::moDetail_query(Fcategory = filter_date(),FStartDate = input$daterange[1], FEndDate =input$daterange[2] ,token = token) 
             datatable(
               data, 
               extensions = 'Scroller',
@@ -197,9 +197,9 @@ shinyServer(function(input, output,session) {
     output$dt2 <- renderDT({
         #判断逾期类型
         if(input$overDueType == 'overDuePrd'){
-            data = vmdlspkg::overDuePrd_query(FCategory =filter_date() )
+            data = vmdlspkg::overDuePrd_query_cn(FCategory =filter_date() ,token = token)
         }else{
-            data = vmdlspkg::overDueSParts_query()
+            data = vmdlspkg::overDueSParts_query_cn(token = token)
         }
        
         datatable(
@@ -212,7 +212,7 @@ shinyServer(function(input, output,session) {
             )
             
         )%>% formatStyle(
-            'Category',
+            '产品分组',
             target = 'row',
             backgroundColor = styleEqual(c(0, 1), c('gray', 'yellow'))
         )
